@@ -234,61 +234,6 @@ class GujaratiTextPreprocessor:
             result += suffix
         return result
 
-    def date_replace(self, match):
-        day_str, month_str, year_str = match.groups()
-        day = int(self.convert_gujarati_to_arabic(day_str))
-        month = int(self.convert_gujarati_to_arabic(month_str))
-        year = int(self.convert_gujarati_to_arabic(year_str))
-        if day == 1:
-            day_words = "પહેલી"
-        elif day == 2:
-            day_words = "બીજી"
-        elif day == 3:
-            day_words = "ત્રીજી"
-        else:
-            day_words = self.number_to_words_indian(day) + "મી"
-        month_map = {
-            1: "જાન્યુઆરી",
-            2: "ફેબ્રુઆરી",
-            3: "માર્ચ",
-            4: "એપ્રિલ",
-            5: "મે",
-            6: "જૂન",
-            7: "જુલાઈ",
-            8: "ઑગસ્ટ",
-            9: "સપ્ટેમ્બર",
-            10: "ઓક્ટોબર",
-            11: "નવેમ્બર",
-            12: "ડિસેમ્બર"
-        }
-        month_words = month_map.get(month, month_str)
-        year_words = self.number_to_words_indian(year)
-        return day_words + " " + month_words + " " + year_words
-
-    def time_replace(self, match):
-        hour_str = match.group(1)
-        minute_str = match.group(2)
-        orig_hour = int(self.convert_gujarati_to_arabic(hour_str))
-        minute = int(self.convert_gujarati_to_arabic(minute_str))
-        if orig_hour == 0 and minute == 0:
-            return "મધરાત"
-        if orig_hour == 0:
-            return "મધરાત " + self.number_to_words_indian(minute) + " મિનિટે"
-        if orig_hour == 12 and minute == 0:
-            return "બપોર"
-        if orig_hour == 12:
-            return "બપોર " + self.number_to_words_indian(minute) + " મિનિટે"
-        if orig_hour >= 18:
-            new_hour = orig_hour - 12
-            prefix = "રાત્રે "
-        elif orig_hour > 12 and orig_hour < 18:
-            new_hour = orig_hour
-            prefix = ""
-        else:
-            new_hour = orig_hour
-            prefix = ""
-        return prefix + self.number_to_words_indian(new_hour) + " વાગ્યા " + self.number_to_words_indian(minute) + " મિનિટે"
-
     def non_currency_decimal_replace(self, match):
         int_part_str, frac_part_str = match.groups()
         int_clean = int_part_str
