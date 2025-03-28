@@ -5,58 +5,54 @@ from typing import Dict, List, Any
 class GujaratiPhonemeDictionary:
     """Comprehensive Gujarati Phoneme Mapping"""
     def __init__(self):
-        # Vowel Phonemes
+        # Vowels 
         self.vowels = {
-            'અ': 'a', 'આ': 'aa', 'ઇ': 'i', 'ઈ': 'ii',
-            'ઉ': 'u', 'ઊ': 'uu', 'એ': 'e', 'ઐ': 'ai',
-            'ઓ': 'o', 'ઔ': 'au'
+            'અ': '/ə/', 'આ': '/aː/', 
+            'ઇ': '/i/', 'ઈ': '/iː/',
+            'ઉ': '/u/', 'ઊ': '/uː/', 
+            'ઋ': '/ɾ̩/', 'ૠ': '/ɾ̩ː/',
+            'એ': '/eː/', 'ઐ': '/əi/', 
+            'ઓ': '/oː/', 'ઔ': '/əu/',
+            'અં': '/əŋ/',
+            'ા': '/aː/', 
+            'િ': '/i/', 'ી': '/iː/', 
+            'ુ': '/u/', 'ૂ': '/uː/',
+            'ૃ': '/ɾ̩/', 'ૄ': '/ɾ̩ː/', 
+            'ે': '/eː/', 'ૈ': '/əi/',
+            'ો': '/oː/', 'ૌ': '/əu/'
         }
         
-        # Consonant Phonemes
-        self.consonants = {
-                # ક વર્ગ (Velar consonants)
-                  'ક': 'kə', 'ખ': 'kʰə', 'ગ': 'gə', 'ઘ': 'gʱə', 'ઙ': 'ŋə',
-    
-                # ચ વર્ગ (Palatal consonants)
-                  'ચ': 'tʃə', 'છ': 'tʃʰə', 'જ': 'dʒə', 'ઝ': 'dʒʱə', 'ઞ': 'ɲə',
-    
-                # ટ વર્ગ (Retroflex consonants)
-                  'ટ': 'ʈə', 'ઠ': 'ʈʰə', 'ડ': 'ɖə', 'ઢ': 'ɖʱə', 'ણ': 'ɳə',
-    
-                # ત વર્ગ (Dental consonants)
-                  'ત': 't̪ə', 'થ': 't̪ʰə', 'દ': 'd̪ə', 'ધ': 'd̪ʱə', 'ન': 'nə',
-    
-                 # પ વર્ગ (Labial consonants)
-                  'પ': 'pə', 'ફ': 'pʰə', 'બ': 'bə', 'ભ': 'bʱə', 'મ': 'mə',
-    
-                 # અંત:સ્થ (Approximants/Semivowels)
-                  'ય': 'jə', 'ર': 'ɾə', 'લ': 'lə', 'વ': 'ʋə',
-    
-                 # ઊષ્મ (Sibilants)
-                  'શ': 'ʃə', 'ષ': 'ʂə', 'સ': 'sə', 'હ': 'ɦə',
-    
-                 # અન્ય (Others)
-                   'ળ': 'ɭə',  # Retroflex lateral
-                   'ક્ષ': 'kʃə',  # Compound
-                   'ત્ર': 't̪ɾə',  # Compound
-                   'જ્ઞ': 'ɡɲə',  # Compound
-    
-                # અનુસ્વાર અને વિસર્ગ
-                   'ં': 'ṁ',  # Anusvara (nasalization)
-                   'ઃ': 'ḥ',   # Visarga (aspiration)
-    
-                # Rare consonants (Sanskrit borrowings)
-                  'ઋ': 'r̩',   # ऋ
-                  'ૠ': 'r̩ː',  # ॠ
-                  'ઌ': 'l̩',    # ऌ
-                  'ૡ': 'l̩ː',  # ॡ
-        }
-        
-        # Vowel Modifiers (Matra)
+        # Vowel Modifiers
         self.vowel_modifiers = {
-            'ા': 'aa', 'િ': 'i', 'ી': 'ii', 'ુ': 'u',
-            'ૂ': 'uu', 'ે': 'e', 'ૈ': 'ai', 'ો': 'o', 'ૌ': 'au'
+            'ં': '/ŋ/',   # Anusvara
+            'ઃ': '/h/',   # Visarga
+            'ઁ': '/˜/',   # Candrabindu
+            '્': None     # Virama (Halant)
         }
+        
+        # Consonants
+        self.consonants = {
+            'ક': '/k/', 'ગ': '/ɡ/', 'ચ': '/tʃ/', 'જ': '/dʒ/',
+            'ટ': '/ʈ/', 'ડ': '/ɖ/', 
+            'ત': '/t/',
+            'દ': '/d̪/',
+            'પ': '/p/', 'બ': '/b/',
+            'ખ': '/kʰ/', 'ઘ': '/ɡʱ/',
+            'છ': '/tʃʰ/', 'ઝ': '/dʒʱ/',
+            'ઠ': '/ʈʰ/', 'ઢ': '/ɖʱ/', 'થ': '/t̪ʰ/', 'ધ': '/d̪ʱ/',
+            'ફ': '/pʰ/',
+            'ભ': '/bʱ/',
+            'મ': '/m/', 'ન': '/n/', 'ણ': '/ɳ/', 'ઙ': '/ŋ/', 'ઞ': '/ɲ/',
+            'સ': '/s/', 'શ': '/ʃ/', 'હ': '/h/', 'ષ': '/ʂ/',
+            'ય': '/j/', 'ર': '/ɾ/', 'લ': '/l/', 'વ': '/ʋ/', 'ળ': '/ɭ/'
+        }
+        
+        # Digits
+        self.digits = {
+            '૦': '0', '૧': '1', '૨': '2', '૩': '3', '૪': '4',
+            '૫': '5', '૬': '6', '૭': '7', '૮': '8', '૯': '9'
+        }
+
 
 class GujaratiProsodyModel:
     """Prosody modeling for Gujarati speech"""
@@ -245,74 +241,3 @@ def process_gujarati_text(text: str, sentence_type: str = "statement") -> Dict[s
         'phoneme_details': phoneme_details,
         'prosody': prosody_result
     }
-
-def visualize_results(results: Dict[str, Any], test_case_num: int):
-    """Visualize the processing results"""
-    print(f"\n=== Test Case {test_case_num} ===")
-    print(f"Original Text: {results['original_text']}")
-    print(f"Normalized Text: {results['normalized_text']}")
-    print(f"Sentence Type: {results['prosody']['sentence_type']}")
-    
-    print("\nGrapheme-to-Phoneme Mapping:")
-    print("Graphemes:", " ".join(results['graphemes']))
-    print("Phonemes: ", " ".join(results['phonemes']))
-    
-    print("\nDetailed Prosodic Analysis:")
-    print("Idx | Grapheme | Phoneme    | Type            | Position    | Stress | Duration | Pitch")
-    print("-" * 80)
-    
-    prosody_index = 0
-    for i, (grapheme, phoneme, detail) in enumerate(zip(
-        results['graphemes'],
-        results['phonemes'],
-        results['phoneme_details']
-    )):
-        if detail['type'] == 'punctuation':
-            print(f"{i:3} | {grapheme:8} | {phoneme:10} | {detail['type']:15} | {'N/A':11} | {'N/A':6} | {'N/A':8} | {'N/A':5}")
-        else:
-            prosody = results['prosody']['phonemes'][prosody_index]
-            print(f"{i:3} | {grapheme:8} | {phoneme:10} | {detail['type']:15} | {prosody['position']:11} | {prosody['stress']:6.2f} | {prosody['duration']:8.2f} | {prosody['pitch']:5.2f}")
-            prosody_index += 1
-    
-    rhythm = results['prosody']['rhythm']
-    print("\nRhythm Metrics:")
-    print(f"Average Duration: {rhythm['avg_duration']:.2f}")
-    print(f"Duration Variance: {rhythm['duration_variance']:.2f}")
-    print(f"Average Pitch: {rhythm['avg_pitch']:.2f}")
-    print(f"Pitch Range: {rhythm['pitch_range']:.2f}")
-    print(f"Speech Rate: {rhythm['speech_rate']:.2f} phonemes/sec")
-    print("="*60)
-
-def run_test_cases():
-    """Run multiple test cases through the pipeline"""
-    test_cases = [
-        {
-            "text": "હેલો, તમે કેમ છો?",
-            "type": "question"
-        },
-        {
-            "text": "મને ગુજરાતી ભાષા ગમે છે!",
-            "type": "exclamation"
-        },
-        {
-            "text": "આજે હવામાન સારું છે.",
-            "type": "statement"
-        },
-        {
-            "text": "તમારું નામ શું છે?",
-            "type": "question"
-        },
-        {
-            "text": "ચાલો ફરવા જઈએ!",
-            "type": "exclamation"
-        }
-    ]
-    
-    for i, test_case in enumerate(test_cases, 1):
-        results = process_gujarati_text(test_case["text"], test_case["type"])
-        visualize_results(results, i)
-
-if __name__ == "__main__":
-    print("=== Gujarati Text Processing with Prosody Analysis ===")
-    print("Running multiple test cases...\n")
-    run_test_cases()
