@@ -5,7 +5,7 @@ import numpy as np
 import librosa
 import soundfile as sf
 import scipy.signal
-from prosody.prosody import process_gujarati_text  # Import the prosody processing function
+from prosody.prosody import process_gujarati_text  #  Import the prosody processingfunction
 
 class ConcatenativeSynthesizer:
     def __init__(self, phoneme_audio_dir):
@@ -185,11 +185,10 @@ class ConcatenativeSynthesizer:
         print(f"Synthesized audio for '{word}' saved to {output_path}")
 
 def main():
-    # Replace with the actual path to your phoneme audio files.
-    phoneme_dir = r'C:\Users\prach\Desktop\Svar-Text-to-Speech\resources\base_phonemes'
+    phoneme_dir = '../resources/base_phonemes'
     synthesizer = ConcatenativeSynthesizer(phoneme_dir)
     # Synthesize the word "કમલ" using integrated prosody.
-    synthesizer.save_synthesized_audio('કમલ', 'synthesized_kamal_with_prosody4.wav')
+    synthesizer.save_synthesized_audio('કમલ', 'audio1.wav')
 
 if __name__ == "__main__":
     main()
