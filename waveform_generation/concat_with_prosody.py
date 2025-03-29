@@ -5,7 +5,7 @@ import numpy as np
 import librosa
 import soundfile as sf
 import scipy.signal
-from prosody.prosody import process_gujarati_text  #  Import the prosody processingfunction
+from prosody.prosody import process_gujarati_text  
 
 class ConcatenativeSynthesizer:
     def __init__(self, phoneme_audio_dir):
@@ -15,13 +15,12 @@ class ConcatenativeSynthesizer:
         :param phoneme_audio_dir: Directory containing pre-recorded phoneme WAV files.
         """
         self.phoneme_audio_dir = phoneme_audio_dir
-        # Update the mapping to use Gujarati characters.
         self.phoneme_map = {
             'ક': 'Svar_K',
             'મ': 'Svar_M',
             'લ': 'Svar_L'
         }
-        self.sr = 22050  # Standard sample rate
+        self.sr = 22050  
 
     def _apply_schwa_deletion(self, letters):
         """
@@ -71,7 +70,6 @@ class ConcatenativeSynthesizer:
         pitched_audio = librosa.effects.pitch_shift(audio, sr=self.sr, n_steps=semitone_shift)
         rate = 1 / duration_factor if duration_factor != 0 else 1.0
         stretched_audio = librosa.effects.time_stretch(pitched_audio, rate=rate)
-        # Use a Hann window as an envelope
         envelope = np.hanning(len(stretched_audio))
         modified_audio = stretched_audio * envelope
         return modified_audio
@@ -104,25 +102,21 @@ class ConcatenativeSynthesizer:
         This example adds a simple reverb effect, amplitude modulation,
         and a low-pass filter.
         """
-        # Create a short impulse response for reverb (100 ms)
-        ir_duration = 0.1  # seconds
+        ir_duration = 0.1  
         ir_length = int(self.sr * ir_duration)
         impulse_response = np.zeros(ir_length)
         impulse_response[0] = 1.0
         impulse_response[int(ir_length * 0.3)] = 0.5
         impulse_response[int(ir_length * 0.6)] = 0.3
 
-        # Convolve the audio with the impulse response to add reverb
         reverbed = np.convolve(audio, impulse_response, mode='same')
 
-        # Amplitude modulation: add a gentle vibrato effect
         t = np.linspace(0, len(reverbed) / self.sr, num=len(reverbed))
         modulation = 1.0 + 0.02 * np.sin(2 * np.pi * 5 * t)  # 5 Hz vibrato, 2% variation
         modulated = reverbed * modulation
 
-        # Apply a low-pass Butterworth filter to smooth the result
         nyquist = self.sr / 2.0
-        cutoff = nyquist * 0.9  # 90% of Nyquist frequency
+        cutoff = nyquist * 0.9  
         b, a = scipy.signal.butter(4, cutoff / nyquist, btype='low')
         smooth_audio = scipy.signal.filtfilt(b, a, modulated)
 
@@ -139,9 +133,7 @@ class ConcatenativeSynthesizer:
         prosody_data = process_gujarati_text(word, sentence_type)
         enhanced_phonemes = prosody_data['prosody']['phonemes']
         
-        # Extract graphemes from prosody results.
         letters = [p['grapheme'] for p in enhanced_phonemes]
-        # Apply schwa deletion.
         processed_letters = self._apply_schwa_deletion(letters)
         print("Final phoneme sequence after schwa deletion:", processed_letters)
         
@@ -151,7 +143,7 @@ class ConcatenativeSynthesizer:
         phoneme_audios = []
         idx = 0
         for letter in processed_letters:
-            lookup = letter  # Here, letter is already in Gujarati (like 'ક')
+            lookup = letter  
             audio, _ = self._load_phoneme_audio(lookup)
             if idx < len(enhanced_phonemes):
                 prosody_info = enhanced_phonemes[idx]
@@ -167,7 +159,6 @@ class ConcatenativeSynthesizer:
         for next_audio in phoneme_audios[1:]:
             synthesized_audio = self._apply_advanced_crossfade(synthesized_audio, next_audio)
         
-        # Post-process the final concatenated audio to add naturalness.
         final_audio = self._post_process_audio(synthesized_audio)
         return final_audio
 
@@ -185,10 +176,9 @@ class ConcatenativeSynthesizer:
         print(f"Synthesized audio for '{word}' saved to {output_path}")
 
 def main():
-    phoneme_dir = '../resources/base_phonemes'
+    phoneme_dir = r'C:\Users\prach\Desktop\Svar-Text-to-Speech\resources\base_phonemes'
     synthesizer = ConcatenativeSynthesizer(phoneme_dir)
-    # Synthesize the word "કમલ" using integrated prosody.
-    synthesizer.save_synthesized_audio('કમલ', 'audio1.wav')
+    synthesizer.save_synthesized_audio('કમલ', 'synthesized_kamal_with_prosody4.wav')
 
 if __name__ == "__main__":
     main()
