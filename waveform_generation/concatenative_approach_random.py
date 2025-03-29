@@ -13,10 +13,9 @@ class ConcatenativeSynthesizer:
         """
         self.phoneme_audio_dir = phoneme_audio_dir
         self.phoneme_map = {
-            'k': 'Svar_K',
-            'a': 'Svar_A',
-            'm': 'Svar_M',
-            'l': 'Svar_L'
+            'ક': 'Svar_K',
+            'મ': 'Svar_M',
+            'લ': 'Svar_L'
         }
         self.sr = 22050  
         
@@ -126,10 +125,10 @@ class ConcatenativeSynthesizer:
         print(f"Synthesized audio for '{word}' saved to {output_path}")
 
 def main():
-    phoneme_dir = r'C:\Users\prach\Desktop\Svar-Text-to-Speech\phonemes_yash'
+    phoneme_dir = r'C:\Users\prach\Desktop\Svar-Text-to-Speech\resources\base_phonemes'
     synthesizer = ConcatenativeSynthesizer(phoneme_dir)
     
-    synthesizer.save_synthesized_audio('kamal', 'synthesized_kamal3.wav')
+    synthesizer.save_synthesized_audio('કમલ', 'synthesized_kamal3.wav')
 
 if __name__ == "__main__":
     main()
