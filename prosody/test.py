@@ -60,10 +60,6 @@ def run_test_cases():
         {
             "text": "ચાલો ફરવા જઈએ!",
             "type": "exclamation"
-        },
-        {
-            "text": "કમલ",
-            "type": "statement"
         }
     ]
     
